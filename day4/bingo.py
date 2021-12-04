@@ -1,6 +1,6 @@
 numbers = []
 # {board: [], last_number: int, won_at: int}
-boards = {}
+boards = []
 boards_i = 0
 
 def checkForWin(board):
@@ -27,17 +27,15 @@ def calculate(board, last):
 
 with open("input.txt", "r") as file:
 	numbers = file.readline().strip().split(",")
-	i = 0
 	for line in file.readlines():
 		line = line.strip()
 		if line == "":
-			i += 1
-			boards[i] = {"board": [], "last_number": None, "won_at": None}
+			boards.append({"board": [], "last_number": None, "won_at": None})
 		else:
 			line = line.split()
-			boards[i]["board"].append(line)
-	boards_i = i
-	for n in range(1,i+1): 
+			boards[-1]["board"].append(line)
+	boards_i = len(boards)
+	for n in range(boards_i): 
 		for (idx, number) in enumerate(numbers):
 			for k in range(len(boards[n]["board"])):
 				for (j, x) in enumerate(boards[n]["board"][k]):
@@ -52,7 +50,7 @@ with open("input.txt", "r") as file:
 # Part 1
 win_board = {}
 won_at = len(numbers)
-for i in range(1, boards_i+1):
+for i in range(boards_i):
 	if boards[i]["won_at"] <= won_at:
 		won_at = boards[i]["won_at"]
 		win_board = boards[i]
@@ -62,7 +60,7 @@ print(calculate(win_board["board"], win_board["last_number"]))
 # Part 2
 lose_board = {}
 won_at = 0
-for i in range(1, boards_i+1):
+for i in range(boards_i):
         if boards[i]["won_at"] >= won_at:
                 won_at = boards[i]["won_at"]
                 lose_board = boards[i]
