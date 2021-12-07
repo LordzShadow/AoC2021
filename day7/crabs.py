@@ -1,10 +1,11 @@
-import statistics, math
 crabs = []
 
 def part1(crab, i):
+	# difference
 	return abs(crab-i)
 
 def part2(crab, i):
+	# Sum of series 1..difference  n(1+n)/2
 	return (part1(crab, i) * (part1(crab, i) + 1)) // 2
 
 with open("input.txt", "r") as file:
