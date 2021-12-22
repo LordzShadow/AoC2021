@@ -1,5 +1,4 @@
 from collections import Counter
-from functools import reduce
 import itertools
 
 scanners = []
